@@ -1,14 +1,18 @@
 pipeline {
     agent {
         docker {
-            image 'my-nodejs-app'
+            image 'node:8'
             args '-p 8000:8000' 
         }
     }
     stages {
         stage('Build') { 
             steps {
-                sh 'cd /code; npm install' 
+                sh 'npm install' 
+            }
+        stage('Test') { 
+            steps {
+                sh 'npm test' 
             }
         }
     }
